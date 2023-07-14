@@ -2,7 +2,6 @@ import { User } from "../entities/user.entity"
 
 export class UserRepository {
   users: User[]
-
   private static instance: UserRepository;
 
   constructor() {
@@ -19,7 +18,7 @@ export class UserRepository {
   }
 
   async findByUserName(username: string) {
-    return this.users.find(user => user.name === username)
+    return this.users.find(user => user.username === username)
   }
 
   async save(data: User) {
