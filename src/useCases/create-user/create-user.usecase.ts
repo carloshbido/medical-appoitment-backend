@@ -11,17 +11,16 @@ type UserRequest = {
 export class CreateUserUseCase {
 
   async execute(data: UserRequest) {
-    const userRepository = UserRepository.getInstance()
+    const userRepository = UserRepository.getInstance();
     const user = User.create(data);
   
-    if(!data.username || !data.password || !data.name) throw new ParameterRequiredError("Username/password is required", 422)
+    if(!data.username || !data.password || !data.name) throw new ParameterRequiredError("Username/password is required", 422);
 
-    const existUser = await userRepository.findByUserName(data.username)
-    console.log(existUser)
+    const existUser = await userRepository.findByUserName(data.username);
 
-    if(existUser) throw new ParameterRequiredError("Username doesn't exists", 404)
+    if(existUser) throw new ParameterRequiredError("Username doesn't exists", 404);
     
     const userCreated = await userRepository.save(user);
-    return userCreated
+    return userCreated;
   }
 }
